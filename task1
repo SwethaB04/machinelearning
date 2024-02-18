@@ -1,0 +1,55 @@
+package ml;
+import java.util.Scanner;
+
+class Graph {
+    int layers;
+    int[] nodes;
+    private int[][] adjacencyMatrix;
+
+    Graph(int layers, int nodes) {
+        this.layers = layers;
+        this.nodes = nodes;
+        this.adjacencyMatrix = new int[nodes][nodes];
+    }
+    public void setWeight(int node1, int node2, int weight) {
+        adjacencyMatrix[node1][node2] = weight; //directed graph
+    }
+    public int getWeight(int node1, int node2) {
+        return adjacencyMatrix[node1][node2];
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of layers: ");
+        int layers = scanner.nextInt();
+
+        int[] nodes = new int[layers];
+        for (int i = 0; i < layers; i++) {
+            System.out.print("Enter the number of nodes in layer " + i + ": ");
+            int nodes[i] = scanner.nextInt();
+        }
+        Graph graph = new Graph(layers, nodes);
+
+        for (int layer = 0; layer < layers; layer++) {
+            for (int node1 = 0; node1 < nodes[layer]; node1++) {
+                for (int node2 = node1 + 1; node2 < nodes[layer]; node2++) {
+                    System.out.print("Enter weight for edge between node " + node1 + " and node " + node2 + " in layer " + (layer + 1) + ": ");
+                    int weight = scanner.nextInt();
+                    graph.setWeight(layer, node1, node2, weight);
+                }
+            }
+        }
+
+        System.out.print("Enter the layer: ");
+        int layer = scanner.nextInt();
+        System.out.print("Enter the source node: ");
+        int sourceNode = scanner.nextInt();
+        System.out.print("Enter the destination node: ");
+        int destinationNode = scanner.nextInt();
+
+        int edgeWeight = graph.getWeight(layer, sourceNode, destinationNode);
+        System.out.println("Weight of the edge between node " + sourceNode + " and node " + destinationNode + " in layer " + (layer + 1) + ": " + edgeWeight);
+
+        scanner.close();
+    }
+}
