@@ -9,7 +9,7 @@ float gradW2(float x1, float x2, float y, float w1, float w2){
 }
 int main() {
     float w1 = 1, w2 = 7;
-    float arr[4][3] = {{0,1,1},{2,1,9},{1,0,1},{-2,1,7}};
+    float arr[4][3] = {{1,0,1},{2,1,9},{0,1,1},{-2,1,7}};
     for (int i=0; i<4;i++){
     float dw1 =gradW1(arr[i][0],arr[i][1],arr[i][2], w1,w2);
     float dw2 = gradW2(arr[i][0],arr[i][1],arr[i][2], w1,w2);
